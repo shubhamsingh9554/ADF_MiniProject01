@@ -1,0 +1,9 @@
+{
+	"name": "ADF-MINI-PROJECT001",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "75ce3503-05ec-4701-8468-21f90afbd848",
+		"tenantId": "2800c0a0-70e9-49be-8733-faeaa6aced99"
+	}
+}
