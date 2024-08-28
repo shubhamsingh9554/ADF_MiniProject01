@@ -1,0 +1,67 @@
+{
+	"name": "DL_MiniProject_Task1_Transformation",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTableUsers",
+						"type": "DatasetReference"
+					},
+					"name": "user"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTableAdmins",
+						"type": "DatasetReference"
+					},
+					"name": "admins"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "select1"
+				},
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          name as string,",
+				"          email as string,",
+				"          password as string,",
+				"          role as string,",
+				"          department as string,",
+				"          reportsTo as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> user",
+				"source(output(",
+				"          name as string,",
+				"          email as string,",
+				"          password as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> admins",
+				"user select(mapColumn(",
+				"          name,",
+				"          email,",
+				"          password,",
+				"          role,",
+				"          department,",
+				"          reportsTo",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"admins filter(ERROR_FUNCTION('')) ~> filter1"
+			]
+		}
+	}
+}
