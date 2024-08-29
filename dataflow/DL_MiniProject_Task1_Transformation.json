@@ -19,13 +19,28 @@
 					"name": "admins"
 				}
 			],
-			"sinks": [],
-			"transformations": [
+			"sinks": [
 				{
-					"name": "select1"
+					"dataset": {
+						"referenceName": "AzureSqlTableUsers",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
 				},
 				{
-					"name": "filter1"
+					"dataset": {
+						"referenceName": "AzureSqlTableAdmins",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RemoveDuplicateRows1"
+				},
+				{
+					"name": "RemoveDuplicaterows2"
 				}
 			],
 			"scriptLines": [
@@ -50,17 +65,30 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> admins",
-				"user select(mapColumn(",
-				"          name,",
-				"          email,",
-				"          password,",
-				"          role,",
-				"          department,",
-				"          reportsTo",
-				"     ),",
+				"user aggregate(groupBy(email),",
+				"     each(match(name!=\"email\"), $$ = first($$))) ~> RemoveDuplicateRows1",
+				"admins aggregate(groupBy(email),",
+				"     each(match(name!=\"email\"), $$ = first($$))) ~> RemoveDuplicaterows2",
+				"RemoveDuplicateRows1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
-				"admins filter(ERROR_FUNCTION('')) ~> filter1"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
+				"RemoveDuplicaterows2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink2"
 			]
 		}
 	}

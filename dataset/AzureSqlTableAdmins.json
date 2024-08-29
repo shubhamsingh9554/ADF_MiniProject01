@@ -9,8 +9,8 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "raw",
-			"table": "miniproject1_admins"
+			"schema": "prep",
+			"table": "admins"
 		}
 	}
 }
