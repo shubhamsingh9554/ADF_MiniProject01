@@ -44,6 +44,12 @@
 				},
 				{
 					"name": "RemoveDuplicaterows2"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "filter2"
 				}
 			],
 			"scriptLines": [
@@ -72,7 +78,9 @@
 				"     each(match(name!=\"email\"), $$ = first($$))) ~> RemoveDuplicateRows1",
 				"admins aggregate(groupBy(email),",
 				"     each(match(name!=\"email\"), $$ = first($$))) ~> RemoveDuplicaterows2",
-				"RemoveDuplicateRows1 sink(allowSchemaDrift: true,",
+				"RemoveDuplicateRows1 filter(!isNull(email) || !isNull(password)) ~> filter1",
+				"RemoveDuplicaterows2 filter(!isNull(email) || !isNull(password)) ~> filter2",
+				"filter1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -83,7 +91,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
-				"RemoveDuplicaterows2 sink(allowSchemaDrift: true,",
+				"filter2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
