@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Task1_Datasets"
+			"name": "Task1_Datasets/Staging"
 		},
 		"annotations": [],
 		"type": "MongoDbAtlasCollection",
