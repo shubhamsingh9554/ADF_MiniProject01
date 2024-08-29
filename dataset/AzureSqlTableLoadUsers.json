@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTableUsers",
+	"name": "AzureSqlTableLoadUsers",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",

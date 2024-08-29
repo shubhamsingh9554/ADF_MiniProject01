@@ -36,7 +36,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlTableUsers",
+						"referenceName": "AzureSqlTableLoadUsers",
 						"type": "DatasetReference"
 					}
 				]
@@ -75,7 +75,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSqlTableAdmins",
+						"referenceName": "AzureSqlTableLoadAdmins",
 						"type": "DatasetReference"
 					}
 				]

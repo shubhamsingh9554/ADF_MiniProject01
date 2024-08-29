@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTableAdmins",
+	"name": "AzureSqlTableLoadAdmins",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",
