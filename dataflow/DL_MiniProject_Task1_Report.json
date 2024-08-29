@@ -1,6 +1,9 @@
 {
 	"name": "DL_MiniProject_Task1_Report",
 	"properties": {
+		"folder": {
+			"name": "DL_MiniProject_Task1"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
