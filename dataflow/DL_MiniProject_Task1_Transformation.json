@@ -22,14 +22,14 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTableUsers",
+						"referenceName": "AzureSqlTablePrepUsers",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
 				},
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTableAdmins",
+						"referenceName": "AzureSqlTablePrepAdmins",
 						"type": "DatasetReference"
 					},
 					"name": "sink2"
