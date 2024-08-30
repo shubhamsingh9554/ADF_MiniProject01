@@ -10,7 +10,142 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "departmentCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "departmentName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "discontinuedProductFlag1",
+				"type": "bit"
+			},
+			{
+				"name": "categoryCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "categoryName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "discontinuedProductFlag2",
+				"type": "bit"
+			},
+			{
+				"name": "categoryCode1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "categoryName1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "searchCategoryCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "seriesCode",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "seriesName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "minStandardUnitPrice",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "maxStandardUnitPrice",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "minPricePerPiece",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "maxPricePerPiece",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "brandCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "brandUrlCode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "brandName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "seriesStatus",
+				"type": "bit"
+			},
+			{
+				"name": "catchCopy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "minStandardDaysToShip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "maxStandardDaysToShip",
+				"type": "nvarchar"
+			},
+			{
+				"name": "directCartType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "priceCheckLessFlag",
+				"type": "nvarchar"
+			},
+			{
+				"name": "recommendFlag",
+				"type": "nvarchar"
+			},
+			{
+				"name": "volumeDiscountFlag",
+				"type": "nvarchar"
+			},
+			{
+				"name": "cValueFlag",
+				"type": "bit"
+			},
+			{
+				"name": "stockItemFlag",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "displayStandardPriceFlag",
+				"type": "bit"
+			},
+			{
+				"name": "discontinuedProductFlag",
+				"type": "bit"
+			},
+			{
+				"name": "cadTypeList",
+				"type": "nvarchar"
+			},
+			{
+				"name": "comparisonSpecValueList",
+				"type": "nvarchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "raw",
 			"table": "task2product"
