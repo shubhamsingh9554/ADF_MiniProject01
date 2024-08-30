@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy data1",
+				"name": "Getting Data from MongoAtlas To SQL Server1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -42,7 +42,7 @@
 				]
 			},
 			{
-				"name": "Copy data2",
+				"name": "Getting Data from MongoAtlas To SQL Server2",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -85,13 +85,13 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "Copy data1",
+						"activity": "Getting Data from MongoAtlas To SQL Server1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "Copy data2",
+						"activity": "Getting Data from MongoAtlas To SQL Server2",
 						"dependencyConditions": [
 							"Succeeded"
 						]
