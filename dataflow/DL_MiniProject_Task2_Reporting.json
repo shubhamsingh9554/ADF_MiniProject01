@@ -104,6 +104,42 @@
 			"transformations": [
 				{
 					"name": "split1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "filter2"
+				},
+				{
+					"name": "filter3"
+				},
+				{
+					"name": "filter4"
+				},
+				{
+					"name": "filter5"
+				},
+				{
+					"name": "filter6"
+				},
+				{
+					"name": "filter7"
+				},
+				{
+					"name": "filter8"
+				},
+				{
+					"name": "filter9"
+				},
+				{
+					"name": "filter10"
+				},
+				{
+					"name": "filter11"
+				},
+				{
+					"name": "filter12"
 				}
 			],
 			"scriptLines": [
@@ -157,7 +193,19 @@
 				"     departmentName == 'Safety & General Supplies',",
 				"     departmentName == 'Wiring Components',",
 				"     disjoint: false) ~> split1@(AutomationComponents, ElectricalControls, Machiningtools, Fasteners, LabCleanRoomSupplies, MaterialHandling, Materials, PlasticsMold, PressDie, ProcessingTools, SafetyGeneral, WiringComponents)",
-				"split1@ElectricalControls sink(allowSchemaDrift: true,",
+				"split1@AutomationComponents filter(!isNull(minStandardUnitPrice) || !isNull(maxStandardUnitPrice)) ~> filter1",
+				"split1@ElectricalControls filter(!isNull(minStandardUnitPrice) || !isNull(maxStandardUnitPrice)) ~> filter2",
+				"split1@Machiningtools filter(!isNull(minStandardUnitPrice) || !isNull(maxStandardUnitPrice)) ~> filter3",
+				"split1@Fasteners filter(!isNull(minStandardUnitPrice) || !isNull(maxStandardUnitPrice)) ~> filter4",
+				"split1@LabCleanRoomSupplies filter(!isNull(minStandardUnitPrice) || !isNull(maxStandardUnitPrice)) ~> filter5",
+				"split1@MaterialHandling filter(!isNull(minStandardUnitPrice) || !isNull(maxStandardUnitPrice)) ~> filter6",
+				"split1@Materials filter(!isNull(minStandardUnitPrice) || !isNull(maxStandardUnitPrice)) ~> filter7",
+				"split1@PlasticsMold filter(!isNull(minStandardUnitPrice) || !isNull(maxStandardUnitPrice)) ~> filter8",
+				"split1@PressDie filter(!isNull(minStandardUnitPrice) || !isNull(maxStandardUnitPrice)) ~> filter9",
+				"split1@ProcessingTools filter(!isNull(minStandardUnitPrice) || !isNull(maxStandardUnitPrice)) ~> filter10",
+				"split1@SafetyGeneral filter(!isNull(minStandardUnitPrice) || !isNull(maxStandardUnitPrice)) ~> filter11",
+				"split1@WiringComponents filter(!isNull(minStandardUnitPrice) || !isNull(maxStandardUnitPrice)) ~> filter12",
+				"filter2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -168,7 +216,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
-				"split1@Machiningtools sink(allowSchemaDrift: true,",
+				"filter3 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -179,7 +227,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink2",
-				"split1@Fasteners sink(allowSchemaDrift: true,",
+				"filter4 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -190,7 +238,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink3",
-				"split1@LabCleanRoomSupplies sink(allowSchemaDrift: true,",
+				"filter5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -201,7 +249,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink4",
-				"split1@MaterialHandling sink(allowSchemaDrift: true,",
+				"filter6 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -212,7 +260,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink5",
-				"split1@Materials sink(allowSchemaDrift: true,",
+				"filter7 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -223,7 +271,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink6",
-				"split1@PlasticsMold sink(allowSchemaDrift: true,",
+				"filter8 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -234,7 +282,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink7",
-				"split1@PressDie sink(allowSchemaDrift: true,",
+				"filter9 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -245,7 +293,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink8",
-				"split1@ProcessingTools sink(allowSchemaDrift: true,",
+				"filter10 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -256,7 +304,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink9",
-				"split1@SafetyGeneral sink(allowSchemaDrift: true,",
+				"filter11 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -267,7 +315,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink10",
-				"split1@WiringComponents sink(allowSchemaDrift: true,",
+				"filter12 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -278,7 +326,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError') ~> sink11",
-				"split1@AutomationComponents sink(allowSchemaDrift: true,",
+				"filter1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
