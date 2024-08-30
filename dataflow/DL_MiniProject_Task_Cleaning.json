@@ -1,0 +1,140 @@
+{
+	"name": "DL_MiniProject_Task_Cleaning",
+	"properties": {
+		"folder": {
+			"name": "DL_MiniProject_Task2"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTableSQlLoaded",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlStagingSink",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select2"
+				},
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          departmentCode as string,",
+				"          departmentName as string,",
+				"          discontinuedProductFlag1 as boolean,",
+				"          categoryCode as string,",
+				"          categoryName as string,",
+				"          discontinuedProductFlag2 as boolean,",
+				"          categoryCode1 as string,",
+				"          categoryName1 as string,",
+				"          searchCategoryCode as string,",
+				"          seriesCode as long,",
+				"          seriesName as string,",
+				"          minStandardUnitPrice as double,",
+				"          maxStandardUnitPrice as double,",
+				"          minPricePerPiece as double,",
+				"          maxPricePerPiece as double,",
+				"          brandCode as string,",
+				"          brandUrlCode as string,",
+				"          brandName as string,",
+				"          seriesStatus as boolean,",
+				"          catchCopy as string,",
+				"          minStandardDaysToShip as string,",
+				"          maxStandardDaysToShip as string,",
+				"          directCartType as string,",
+				"          priceCheckLessFlag as string,",
+				"          recommendFlag as string,",
+				"          volumeDiscountFlag as string,",
+				"          cValueFlag as boolean,",
+				"          stockItemFlag as short,",
+				"          displayStandardPriceFlag as boolean,",
+				"          discontinuedProductFlag as boolean,",
+				"          cadTypeList as string,",
+				"          comparisonSpecValueList as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"source1 select(mapColumn(",
+				"          departmentCode,",
+				"          departmentName,",
+				"          categoryCode,",
+				"          categoryName,",
+				"          categoryCode1,",
+				"          categoryName1,",
+				"          searchCategoryCode,",
+				"          seriesCode,",
+				"          seriesName,",
+				"          minStandardUnitPrice,",
+				"          maxStandardUnitPrice,",
+				"          minPricePerPiece,",
+				"          maxPricePerPiece,",
+				"          brandCode,",
+				"          brandUrlCode,",
+				"          brandName,",
+				"          minStandardDaysToShip,",
+				"          maxStandardDaysToShip,",
+				"          directCartType",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 derive(ProductCategory = categoryName+ '-'+categoryName1) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          departmentCode,",
+				"          departmentName,",
+				"          categoryCode,",
+				"          categoryName = ProductCategory,",
+				"          categoryCode1,",
+				"          searchCategoryCode,",
+				"          seriesCode,",
+				"          seriesName,",
+				"          minStandardUnitPrice,",
+				"          maxStandardUnitPrice,",
+				"          minPricePerPiece,",
+				"          maxPricePerPiece,",
+				"          brandCode,",
+				"          brandUrlCode,",
+				"          brandName,",
+				"          minStandardDaysToShip,",
+				"          maxStandardDaysToShip,",
+				"          directCartType",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2 filter(!isNull(minStandardUnitPrice) || !isNull(maxStandardUnitPrice)) ~> filter1",
+				"filter1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}

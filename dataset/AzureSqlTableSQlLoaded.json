@@ -1,0 +1,19 @@
+{
+	"name": "AzureSqlTableSQlLoaded",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Task2_Datasets/Staging"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "raw",
+			"table": "task2product"
+		}
+	}
+}

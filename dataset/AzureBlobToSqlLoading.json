@@ -1,0 +1,26 @@
+{
+	"name": "AzureBlobToSqlLoading",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageTask2_BlobSql",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Task2_Datasets/Staging"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "products_testing.csv",
+				"container": "inputtask2"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
