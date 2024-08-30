@@ -37,6 +37,9 @@
 				},
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "AlterRow1"
 				}
 			],
 			"scriptLines": [
@@ -63,7 +66,9 @@
 				"     format: 'table') ~> admins01",
 				"users01, admins01 union(byName: true)~> union1",
 				"union1 filter(!isNull(email) || !isNull(password)) ~> filter1",
-				"filter1 sink(allowSchemaDrift: true,",
+				"filter1 alterRow(updateIf(!isNull(email)),",
+				"     insertIf(!isNull(email))) ~> AlterRow1",
+				"AlterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",

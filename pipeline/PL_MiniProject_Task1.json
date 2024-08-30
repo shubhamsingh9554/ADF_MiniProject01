@@ -5,6 +5,8 @@
 			{
 				"name": "Getting Data from MongoAtlas To SQL Server1",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -44,6 +46,8 @@
 			{
 				"name": "Getting Data from MongoAtlas To SQL Server2",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
