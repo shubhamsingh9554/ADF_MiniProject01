@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "DL_MiniProejct_Task2_Load",
+						"referenceName": "DL_MiniProejct_Task2_Staging",
 						"type": "DataFlowReference"
 					},
 					"compute": {
