@@ -1,0 +1,284 @@
+{
+	"name": "DL_MiniProject_Task2_Reporting",
+	"properties": {
+		"folder": {
+			"name": "DL_MiniProject_Task2"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureBlobToSqlLoading",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ElectricalControls",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "MachiningTools",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				},
+				{
+					"dataset": {
+						"referenceName": "Fasteners",
+						"type": "DatasetReference"
+					},
+					"name": "sink3"
+				},
+				{
+					"dataset": {
+						"referenceName": "LabClean",
+						"type": "DatasetReference"
+					},
+					"name": "sink4"
+				},
+				{
+					"dataset": {
+						"referenceName": "MaterialHandling",
+						"type": "DatasetReference"
+					},
+					"name": "sink5"
+				},
+				{
+					"dataset": {
+						"referenceName": "Materials",
+						"type": "DatasetReference"
+					},
+					"name": "sink6"
+				},
+				{
+					"dataset": {
+						"referenceName": "PlasticMold",
+						"type": "DatasetReference"
+					},
+					"name": "sink7"
+				},
+				{
+					"dataset": {
+						"referenceName": "PressDie",
+						"type": "DatasetReference"
+					},
+					"name": "sink8"
+				},
+				{
+					"dataset": {
+						"referenceName": "Processingtools",
+						"type": "DatasetReference"
+					},
+					"name": "sink9"
+				},
+				{
+					"dataset": {
+						"referenceName": "SafetyGeneral",
+						"type": "DatasetReference"
+					},
+					"name": "sink10"
+				},
+				{
+					"dataset": {
+						"referenceName": "WiringComponents",
+						"type": "DatasetReference"
+					},
+					"name": "sink11"
+				},
+				{
+					"dataset": {
+						"referenceName": "AutomationComponents",
+						"type": "DatasetReference"
+					},
+					"name": "sink12"
+				}
+			],
+			"transformations": [
+				{
+					"name": "split1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          departmentCode as string,",
+				"          departmentName as string,",
+				"          discontinuedProductFlag1 as boolean,",
+				"          categoryCode as string,",
+				"          categoryName as string,",
+				"          discontinuedProductFlag2 as boolean,",
+				"          categoryCode1 as string,",
+				"          categoryName1 as string,",
+				"          searchCategoryCode as string,",
+				"          seriesCode as long,",
+				"          seriesName as string,",
+				"          minStandardUnitPrice as double,",
+				"          maxStandardUnitPrice as double,",
+				"          minPricePerPiece as double,",
+				"          maxPricePerPiece as double,",
+				"          brandCode as string,",
+				"          brandUrlCode as string,",
+				"          brandName as string,",
+				"          seriesStatus as boolean,",
+				"          catchCopy as string,",
+				"          minStandardDaysToShip as string,",
+				"          maxStandardDaysToShip as string,",
+				"          directCartType as string,",
+				"          priceCheckLessFlag as string,",
+				"          recommendFlag as string,",
+				"          volumeDiscountFlag as string,",
+				"          cValueFlag as boolean,",
+				"          stockItemFlag as short,",
+				"          displayStandardPriceFlag as boolean,",
+				"          discontinuedProductFlag as boolean,",
+				"          cadTypeList as string,",
+				"          comparisonSpecValueList as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 split(departmentName == 'Automation Components',",
+				"     departmentName == 'Electrical & Controls',",
+				"     departmentName == 'Machining tools',",
+				"     departmentName == 'Fasteners',",
+				"     departmentName == 'Lab & Clean Room Supplies',",
+				"     departmentName == 'Material Handling & Storage',",
+				"     departmentName == 'Materials',",
+				"     departmentName == 'Plastic Mold Components',",
+				"     departmentName == 'Press Die Components',",
+				"     departmentName == 'Processing Tools',",
+				"     departmentName == 'Safety & General Supplies',",
+				"     departmentName == 'Wiring Components',",
+				"     disjoint: false) ~> split1@(AutomationComponents, ElectricalControls, Machiningtools, Fasteners, LabCleanRoomSupplies, MaterialHandling, Materials, PlasticsMold, PressDie, ProcessingTools, SafetyGeneral, WiringComponents)",
+				"split1@ElectricalControls sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
+				"split1@Machiningtools sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink2",
+				"split1@Fasteners sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink3",
+				"split1@LabCleanRoomSupplies sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink4",
+				"split1@MaterialHandling sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink5",
+				"split1@Materials sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink6",
+				"split1@PlasticsMold sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink7",
+				"split1@PressDie sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink8",
+				"split1@ProcessingTools sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink9",
+				"split1@SafetyGeneral sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink10",
+				"split1@WiringComponents sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink11",
+				"split1@AutomationComponents sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink12"
+			]
+		}
+	}
+}
