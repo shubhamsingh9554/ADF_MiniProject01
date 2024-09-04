@@ -29,6 +29,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTableAdminResult",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
 				}
 			],
 			"transformations": [
@@ -40,6 +47,13 @@
 				},
 				{
 					"name": "AlterRow1"
+				},
+				{
+					"name": "filter2"
+				},
+				{
+					"name": "alterRow2",
+					"description": "Inserting, updating, deleting, and/or upserting using expressions on columns 'email'"
 				}
 			],
 			"scriptLines": [
@@ -68,6 +82,8 @@
 				"union1 filter(!isNull(email) || !isNull(password)) ~> filter1",
 				"filter1 alterRow(updateIf(!isNull(email)),",
 				"     insertIf(!isNull(email))) ~> AlterRow1",
+				"admins01 filter(!isNull(email) || !isNull(password)) ~> filter2",
+				"filter2 alterRow() ~> alterRow2",
 				"AlterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
@@ -78,7 +94,17 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
+				"alterRow2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink2"
 			]
 		}
 	}
