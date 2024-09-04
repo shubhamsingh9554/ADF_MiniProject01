@@ -5,6 +5,9 @@
 			"referenceName": "AzureSqlDatabase1",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Task1_Datasets/Transformation"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [],
